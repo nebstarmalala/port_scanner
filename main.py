@@ -1,21 +1,30 @@
 import socket
+import pyfiglet
+import time
 
-s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-s.settimeout(2)
+class portScan:
+    def __init__(self):
+        print("[!] INITIALIZING PORT SCANNER [!]")
+        time.sleep(3)
 
-# port = 1000
-for portx in range (1, 100):
-    try:
-        s.connect(('ad.samsclass.info', portx))
-        r = s.recv(1024)
-        if 'Congratulations' in r.decode('utf8'):
-            print('[!] HIDDEN SERVICE FOUND:%s ~ %s' % (portx, r.decode('utf8')))
-            s.close()
-            break
-        else:
-            print('%s ~ %s' % (portx, r.decode('utf8')))
-            s.close()
-    except socket.error as err:
-        print('%s ~ %s' % (portx, err))
+    def banner(self):
+        self.banner = pyfiglet.figlet_format("PORT SCANNER")
+        print(self.banner)
 
-    # port += 1000
+    def target(self):
+        self.target = input("Input target: ")
+        self.target = socket.gethostbyname(self.target)
+        self.ports = input("Enter no of ports: ")
+
+        print(self.target)
+        print(self.ports)
+
+    def scanner():
+        self.sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        self.
+
+
+if __name__ == "__main__":
+    scan = portScan()
+    scan.banner()
+    scan.target()
