@@ -2,29 +2,32 @@ import socket
 import pyfiglet
 import time
 
-class portScan:
-    def __init__(self):
-        print("[!] INITIALIZING PORT SCANNER [!]")
+
+def banner():
+    print("[!] INITIALIZING PORT SCANNER [!]")
+    time.sleep(3)
+    banner = pyfiglet.figlet_format("PORT SCANNER")
+    print(banner)
+
+banner()
+
+try:
+    target = input("Input target: ")
+    target = socket.gethostbyname(target)
+except:
+    print("[*] Unable to get target")
+
+def scanner(port):
+    try:
+        sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        sock.connect((target, port))
         time.sleep(3)
+        return True
+    except:
+        return False
 
-    def banner(self):
-        self.banner = pyfiglet.figlet_format("PORT SCANNER")
-        print(self.banner)
-
-    def target(self):
-        self.target = input("Input target: ")
-        self.target = socket.gethostbyname(self.target)
-        self.ports = input("Enter no of ports: ")
-
-        print(self.target)
-        print(self.ports)
-
-    def scanner():
-        self.sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        self.
-
-
-if __name__ == "__main__":
-    scan = portScan()
-    scan.banner()
-    scan.target()
+print(f"[!] Scanning {target}")
+for port in range(1, 100):
+    print(f"Scanning port: {port}")
+    if scanner(port):
+        print(f"Port {port} : OPEN")
